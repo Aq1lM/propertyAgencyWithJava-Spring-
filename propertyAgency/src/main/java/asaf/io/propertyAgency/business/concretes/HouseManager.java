@@ -10,6 +10,7 @@ import asaf.io.propertyAgency.business.requests.CreateHouseRequest;
 import asaf.io.propertyAgency.business.requests.UpdateHouseRequest;
 import asaf.io.propertyAgency.business.responses.GetAllHouseResponse;
 import asaf.io.propertyAgency.business.responses.GetByIdHouseResponse;
+import asaf.io.propertyAgency.business.responses.GetByIdLocationResponse;
 import asaf.io.propertyAgency.core.utilities.mappers.ModelMapperService;
 import asaf.io.propertyAgency.dataAccess.abstracts.HouseRepository;
 import asaf.io.propertyAgency.entities.concretes.House;
@@ -62,6 +63,18 @@ public class HouseManager implements HouseService{
 				.collect(Collectors.toList());
 		
 		return houseResponses;
+	}
+
+	@Override
+	public List<GetByIdLocationResponse> getByIdLocation(int locationId) {
+		List<House> houses = this.houseRepository.findAll();
+		
+		List<GetByIdLocationResponse> getByIdLocationResponses = houses.stream()
+				.filter(house -> house.getLocation().getLocationId() == locationId)
+				.map(house -> this.modelMapperService.forResponse().map(house, GetByIdLocationResponse.class))
+				.collect(Collectors.toList());
+		
+		return getByIdLocationResponses;
 	}
 
 }

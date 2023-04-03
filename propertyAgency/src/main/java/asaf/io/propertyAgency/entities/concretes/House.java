@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,12 +26,15 @@ public class House {
 	@Column(name = "houseNumber")
 	private String houseNumber;
 	
+	@OneToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 	
+	@OneToOne
 	@JoinColumn(name = "kindId")
 	private Kind kind;
 	
+	@OneToOne
 	@JoinColumn(name = "sellerId")
 	private Seller seller;
 	
