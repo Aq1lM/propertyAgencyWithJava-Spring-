@@ -9,14 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateHouseRequest {
 	private int id;
-	
 	private String houseNumber;
-	
-	private int locationId;
-	
-	private int kindId;
-	
-	private int sellerId;
-	
+	private int locationId;	
+	private int kindId;	
+	private int sellerId;	
 	private double price;
 }

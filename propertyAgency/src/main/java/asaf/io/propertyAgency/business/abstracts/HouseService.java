@@ -6,7 +6,6 @@ import asaf.io.propertyAgency.business.requests.CreateHouseRequest;
 import asaf.io.propertyAgency.business.requests.UpdateHouseRequest;
 import asaf.io.propertyAgency.business.responses.GetAllHouseResponse;
 import asaf.io.propertyAgency.business.responses.GetByIdHouseResponse;
-import asaf.io.propertyAgency.business.responses.GetByIdLocationResponse;
 
 public interface HouseService {
 	void add(CreateHouseRequest createHouseRequest);
@@ -15,5 +14,9 @@ public interface HouseService {
 	GetByIdHouseResponse getById(int id);
 	List<GetAllHouseResponse> getAll();
 	
-	List<GetByIdLocationResponse> getByIdLocation(int locationId);
+	List<GetAllHouseResponse> getByIdLocation(int locationId);
+	
+	List<GetAllHouseResponse> getByIdKindResponses(int kindId);
+	
+	List<GetAllHouseResponse> getByIdSellerResponses(int sellerId);
 }

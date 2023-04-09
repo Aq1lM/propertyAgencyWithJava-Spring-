@@ -10,7 +10,6 @@ import asaf.io.propertyAgency.business.requests.CreateHouseRequest;
 import asaf.io.propertyAgency.business.requests.UpdateHouseRequest;
 import asaf.io.propertyAgency.business.responses.GetAllHouseResponse;
 import asaf.io.propertyAgency.business.responses.GetByIdHouseResponse;
-import asaf.io.propertyAgency.business.responses.GetByIdLocationResponse;
 import asaf.io.propertyAgency.core.utilities.mappers.ModelMapperService;
 import asaf.io.propertyAgency.dataAccess.abstracts.HouseRepository;
 import asaf.io.propertyAgency.entities.concretes.House;
@@ -66,15 +65,40 @@ public class HouseManager implements HouseService{
 	}
 
 	@Override
-	public List<GetByIdLocationResponse> getByIdLocation(int locationId) {
+	public List<GetAllHouseResponse> getByIdLocation(int locationId) {
 		List<House> houses = this.houseRepository.findAll();
 		
-		List<GetByIdLocationResponse> getByIdLocationResponses = houses.stream()
-				.filter(house -> house.getLocation().getLocationId() == locationId)
-				.map(house -> this.modelMapperService.forResponse().map(house, GetByIdLocationResponse.class))
+		List<GetAllHouseResponse> getByLocationIdResponses = houses.stream()
+				.filter(house -> house.getLocation().getId() == locationId)
+				.map(house -> this.modelMapperService.forResponse().map(house, GetAllHouseResponse.class))
 				.collect(Collectors.toList());
 		
-		return getByIdLocationResponses;
+		return getByLocationIdResponses;
 	}
 
+	@Override
+	public List<GetAllHouseResponse> getByIdKindResponses(int kindId) {
+		List<House> houses = this.houseRepository.findAll();
+		
+		List<GetAllHouseResponse> getByKindIdResponses = houses.stream()
+				.filter(house -> house.getKind().getId() == kindId)
+				.map(house -> this.modelMapperService.forResponse().map(house, GetAllHouseResponse.class))
+				.collect(Collectors.toList());
+		
+		return getByKindIdResponses;
+	}
+
+	@Override
+	public List<GetAllHouseResponse> getByIdSellerResponses(int sellerId) {
+		List<House> houses = this.houseRepository.findAll();
+		
+		List<GetAllHouseResponse> getBySellerIdResponses = houses.stream()
+				.filter(house -> house.getSeller().getId() == sellerId)
+				.map(house -> this.modelMapperService.forResponse().map(house, GetAllHouseResponse.class))
+				.collect(Collectors.toList());
+		
+		return getBySellerIdResponses;
+	}
+	
+	
 }

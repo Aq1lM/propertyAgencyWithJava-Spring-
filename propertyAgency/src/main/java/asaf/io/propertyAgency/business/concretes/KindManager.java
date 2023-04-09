@@ -10,6 +10,7 @@ import asaf.io.propertyAgency.business.requests.CreateKindRequest;
 import asaf.io.propertyAgency.business.requests.UpdateKindRequest;
 import asaf.io.propertyAgency.business.responses.GetAllKindResponse;
 import asaf.io.propertyAgency.business.responses.GetByIdKindResponse;
+import asaf.io.propertyAgency.business.rules.KindBusinessRules;
 import asaf.io.propertyAgency.core.utilities.mappers.ModelMapperService;
 import asaf.io.propertyAgency.dataAccess.abstracts.KindRepository;
 import asaf.io.propertyAgency.entities.concretes.Kind;
@@ -20,16 +21,19 @@ import lombok.AllArgsConstructor;
 public class KindManager implements KindService{
 	private KindRepository kindRepository;
 	private ModelMapperService mapperService;
+	private KindBusinessRules businessRules;
 
 	@Override
 	public void add(CreateKindRequest createKindRequest) {
+		this.businessRules.checkIfKindExists(createKindRequest.getKind());
+		
 		Kind kind = this.mapperService.forRequest().map(createKindRequest, Kind.class);
 		
 		this.kindRepository.save(kind);
 	}
 
 	@Override
-	public void update(UpdateKindRequest updateKindRequest) {
+	public void update(UpdateKindRequest updateKindRequest) {		
 		Kind kind = mapperService.forRequest().map(updateKindRequest, Kind.class);
 		
 		this.kindRepository.save(kind);

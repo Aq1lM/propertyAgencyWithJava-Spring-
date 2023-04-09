@@ -51,4 +51,19 @@ public class HousesController {
 	public void delete(@PathVariable int id) {
 		this.houseService.delete(id);
 	}
+	
+	@GetMapping("/kind/{kindId}")
+	public List<GetAllHouseResponse> getByKindIdResponse(@PathVariable int kindId) {
+		return this.houseService.getByIdKindResponses(kindId);
+	}
+	
+	@GetMapping("/location/{locationId}")
+	public List<GetAllHouseResponse> getByIdLocationResponse(@PathVariable int locationId) {
+		return this.houseService.getByIdLocation(locationId);
+	}
+	
+	@GetMapping("/seller/{sellerId}")
+	public List<GetAllHouseResponse> getByIdSellerResponses(@PathVariable int sellerId) {
+		return this.houseService.getByIdSellerResponses(sellerId);
+	}
 }

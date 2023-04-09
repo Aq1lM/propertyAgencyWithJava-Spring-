@@ -22,20 +22,20 @@ public class House {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "houseNumber")
-	private String houseNumber;
-	
+
 	@OneToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 	
 	@OneToOne
-	@JoinColumn(name = "kindId")
+	@JoinColumn(name = "kind_id")
 	private Kind kind;
 	
+	@Column(name = "houseNumber")
+	private String houseNumber;
+	
 	@OneToOne
-	@JoinColumn(name = "sellerId")
+	@JoinColumn(name = "seller_id")
 	private Seller seller;
 	
 	@Column(name = "price")

@@ -19,7 +19,7 @@ public class Kind {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int kindId;
+	private int id;
 	
 	@Column(name = "kind")
 	private String kind;
